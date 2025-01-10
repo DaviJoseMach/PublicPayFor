@@ -40,7 +40,7 @@ We welcome contributions from the community! To get started:
 PayFor empowers SaaS businesses to easily find the best payment gateway for their needs. By simplifying integration and providing powerful filtering tools, it’s designed to optimize time and enhance productivity for developers.  
 
 ### API Documentation  
-For API details, check out the [API Documentation](./API.md) for implementation guides and future plans.  
+For API details, check out the [API Documentation](https://github.com/DaviJoseMach/PublicPayFor/blob/main/api/API.md) for implementation guides and future plans.  
 
 ---  
 
