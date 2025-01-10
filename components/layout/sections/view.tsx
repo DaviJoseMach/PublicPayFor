@@ -13,7 +13,7 @@ export const View: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedGateway, setSelectedGateway] = useState<any | null>(null); // Estado para modal
-  const [inputMoney, setInputMoney] = useState<number>(0);
+  const [inputMoney, setInputMoney] = useState<string>(""); // Inicializa como string vazia
   const [calculatedAmount, setCalculatedAmount] = useState<number>(0);
 
   //sidebar variaveis 
@@ -26,7 +26,7 @@ export const View: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
 
   const tags = ["Todos", "Mais usada", "Tendência", "Novo", "Recomendado", "Inovador"];
-  const resources = ["Todos", "Pix", "Checkout", "No-Code", "Comunidade", "Low-Code"];
+  const resources = ["Todos", "Pix", "Cartão de crédito","Cartão de débito", "Assinatura", "Checkout", "No-Code", "Comunidade", "Low-Code"];
   const difficulties = ["Todos", "Fácil", "Média", "Difícil"];
   const countries = [
     { name: "Todos", emoji: "🌍" }, // Mundo, todos os países
@@ -113,7 +113,7 @@ export const View: React.FC = () => {
 
   const handleExpand = (gateway: any) => {
     setSelectedGateway(gateway); // Define o gateway selecionado
-    setInputMoney(0);
+    setInputMoney("");
     setCalculatedAmount(0);
   };
 
@@ -122,17 +122,17 @@ export const View: React.FC = () => {
   };
 
   const handleInputChange = (value: string) => {
-    const money = parseFloat(value) || 0;
-    setInputMoney(money);
-
+    const numericValue = parseFloat(value) || 0;
+    setInputMoney(value); 
     if (selectedGateway?.nome === "AbacatePay 🥑") {
-      const calculated = money - 0.80;
+      const calculated = numericValue - 0.80;
       setCalculatedAmount(calculated);
     } else if (selectedGateway) {
-      const calculated = money - (money * (selectedGateway.porcentagem / 100));
+      const calculated = numericValue - (numericValue * (selectedGateway.porcentagem / 100));
       setCalculatedAmount(calculated);
     }
   };
+  
   
   return (
 
