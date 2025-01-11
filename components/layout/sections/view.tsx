@@ -379,7 +379,7 @@ export const View: React.FC = () => {
                   {selectedGateway.recursos?.map((recurso: string, index: number) => (
                     <span
                       key={index}
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D]"
+                      className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D] mb-4"
                     ><CodeXml className="w-4 h-4 mr-1" />
                       {recurso}
                     </span>
