@@ -26,7 +26,7 @@ export const View: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
 
   const tags = ["Todos", "Mais usada", "Tendência", "Novo", "Recomendado", "Inovador"];
-  const resources = ["Todos", "Pix", "Cartão de crédito","Cartão de débito", "Assinatura", "Checkout", "No-Code", "Comunidade", "Low-Code"];
+  const resources = ["Todos", "Pix", "Cartão de crédito", "Cartão de débito", "Assinatura", "Checkout", "No-Code", "Comunidade", "Low-Code"];
   const difficulties = ["Todos", "Fácil", "Média", "Difícil"];
   const countries = [
     { name: "Todos", emoji: "🌍" }, // Mundo, todos os países
@@ -123,7 +123,7 @@ export const View: React.FC = () => {
 
   const handleInputChange = (value: string) => {
     const numericValue = parseFloat(value) || 0;
-    setInputMoney(value); 
+    setInputMoney(value);
     if (selectedGateway?.nome === "AbacatePay 🥑") {
       const calculated = numericValue - 0.80;
       setCalculatedAmount(calculated);
@@ -132,13 +132,13 @@ export const View: React.FC = () => {
       setCalculatedAmount(calculated);
     }
   };
-  
-  
+
+
   return (
 
     <div>
-     <NextThemesProvider>
-     <aside
+      <NextThemesProvider>
+        <aside
           id="logo-sidebar"
           className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             } sm:translate-x-0 border-r border-gray-300 dark:border-[#292524]`}
@@ -172,8 +172,8 @@ export const View: React.FC = () => {
                       key={tag}
                       onClick={() => toggleSelection(tag, selectedTags, setSelectedTags)}
                       className={`px-3 py-1 text-sm font-medium border rounded-[15px] ${selectedTags.includes(tag)
-                          ? "bg-[#65BE00] text-white border-[#65BE00]"
-                          : "bg-transparent text-gray-700 dark:text-gray-300 border-[#65BE00] dark:border-[#A9C24D]"
+                        ? "bg-[#65BE00] text-white border-[#65BE00]"
+                        : "bg-transparent text-gray-700 dark:text-gray-300 border-[#65BE00] dark:border-[#A9C24D]"
                         }`}
                     >
                       {tag}
@@ -195,8 +195,8 @@ export const View: React.FC = () => {
                         toggleSelection(resource, selectedResources, setSelectedResources)
                       }
                       className={`px-3 py-1 text-sm font-medium border rounded-[15px] ${selectedResources.includes(resource)
-                          ? "bg-[#65BE00] text-white border-[#65BE00]"
-                          : "bg-transparent text-gray-700 dark:text-gray-300 border-[#65BE00] dark:border-[#A9C24D]"
+                        ? "bg-[#65BE00] text-white border-[#65BE00]"
+                        : "bg-transparent text-gray-700 dark:text-gray-300 border-[#65BE00] dark:border-[#A9C24D]"
                         }`}
                     >
                       {resource}
@@ -281,13 +281,16 @@ export const View: React.FC = () => {
                       {(typeof gateway.tag === 'string' ? gateway.tag.split(',') : gateway.tag)?.map((tag: string, index: number) => (
                         <span
                           key={index}
-                          className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D]"
+                          className={`flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D] ${index > 0 ? 'hidden sm:flex' : ''
+                            } mb-4`}
                         >
                           <ChevronsUp className="w-4 h-4 mr-1" />
                           {tag.trim()}
                         </span>
                       ))}
                     </div>
+
+
                   </div>
                 </div>
                 <hr className="w-full border-t border-gray-300 dark:border-[#292524] my-4" />
@@ -321,132 +324,132 @@ export const View: React.FC = () => {
           </div>
 
           {selectedGateway && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-[#161412] rounded-[12px] p-6 max-w-lg w-full sm:m-4 m-2">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white dark:bg-[#161412] rounded-[12px] p-6 max-w-lg w-full sm:m-4 m-2">
 
-              <div className="flex items-center mb-4">
-                <Image
-                  src={selectedGateway.logo}
-                  alt={`${selectedGateway.nome} logo`}
-                  className="w-16 h-16 rounded-md mr-4"
-                  width={64}  // Defina o valor adequado
-                  height={64}
-                />
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {selectedGateway.nome}
-                </h2>
-              </div>
-              <hr className="mb-4" />
-              <div className="mb-4">
-                <p className="font-medium">Dificuldade:  ‎
-                  <span className="text-[#65BE00] dark:text-[#A9C24E]">
-                    {selectedGateway.dificuldade}
-                  </span>
-                </p>
-                <p className="font-medium">Países: ‎
-                  <span className="inline-flex items-center space-x-2">
-                    {selectedGateway.paises?.map((pais: string, index: number) => (
+                <div className="flex items-center mb-4">
+                  <Image
+                    src={selectedGateway.logo}
+                    alt={`${selectedGateway.nome} logo`}
+                    className="w-16 h-16 rounded-md mr-4"
+                    width={64}  // Defina o valor adequado
+                    height={64}
+                  />
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {selectedGateway.nome}
+                  </h2>
+                </div>
+                <hr className="mb-4" />
+                <div className="mb-4">
+                  <p className="font-medium">Dificuldade:  ‎
+                    <span className="text-[#65BE00] dark:text-[#A9C24E]">
+                      {selectedGateway.dificuldade}
+                    </span>
+                  </p>
+                  <p className="font-medium">Países: ‎
+                    <span className="inline-flex items-center space-x-2">
+                      {selectedGateway.paises?.map((pais: string, index: number) => (
+                        <span
+                          key={index}
+                          className="bg-[#FAFAF9] text-[#65BE00] text-xs font-medium py-1 px-2 rounded-[15px] hover:bg-[#EEF7E3] dark:bg-[#2A2921] dark:hover:bg-[#2B2A21] dark:text-[#A9C24D]"
+                        >
+                          {pais}
+                        </span>
+                      ))}
+                    </span>
+                  </p>
+                </div>
+
+
+
+                <div className="mb-4">
+                  <h3 className="font-medium mb-2">Tags</h3>
+                  <div className="flex flex-wrap space-x-2">
+                    {selectedGateway.tag?.map((tag: string, index: number) => (
                       <span
                         key={index}
-                        className="bg-[#FAFAF9] text-[#65BE00] text-xs font-medium py-1 px-2 rounded-[15px] hover:bg-[#EEF7E3] dark:bg-[#2A2921] dark:hover:bg-[#2B2A21] dark:text-[#A9C24D]"
-                      >
-                        {pais}
+                        className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D]"
+                      ><ChevronsUp className="w-4 h-4 mr-1" />
+                        {tag}
                       </span>
                     ))}
-                  </span>
-                </p>
-              </div>
+                  </div>
+                </div>
 
+                <div className="mb-4">
+                  <h3 className="font-medium mb-2">Recursos</h3>
+                  <div className="flex flex-wrap space-x-2">
+                    {selectedGateway.recursos?.map((recurso: string, index: number) => (
+                      <span
+                        key={index}
+                        className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D] mb-4"
+                      ><CodeXml className="w-4 h-4 mr-1" />
+                        {recurso}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-
-              <div className="mb-4">
-                <h3 className="font-medium mb-2">Tags</h3>
-                <div className="flex flex-wrap space-x-2">
-                  {selectedGateway.tag?.map((tag: string, index: number) => (
-                    <span
-                      key={index}
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D]"
-                    ><ChevronsUp className="w-4 h-4 mr-1" />
-                      {tag}
+                <hr className="mb-4" />
+                <div className="mb-4">
+                  <h3 className="font-medium mb-2">
+                    Simulação{" "}
+                    <span className="text-[#65BE00] dark:text-[#A9C24E]">
+                      (~
+                      {selectedGateway.nome === "AbacatePay 🥑"
+                        ? `${selectedGateway.porcentagem}R$`
+                        : `${selectedGateway.porcentagem}%`}
+                      )
                     </span>
-                  ))}
+                  </h3>
+
+                  <div className="flex items-center space-x-4">
+                    <input
+                      type="number"
+                      placeholder="Seu dinheiro"
+                      value={inputMoney}
+                      onChange={(e) => handleInputChange(e.target.value)}
+                      className="p-2 border-[2px] rounded-md w-1/2 bg-white border-[#9AB247] focus:outline-none focus:ring-0 focus:border-[#73C417] dark:text-[white] dark:bg-[#313027]"
+                    />
+                    <input
+                      type="number"
+                      value={calculatedAmount.toFixed(2)}
+                      disabled
+                      className="p-2 border-[2px] rounded-md w-1/2 bg-gray-200 border-[#9AB247] focus:outline-none focus:ring-0 dark:bg-[#312F27]"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="mb-4">
-                <h3 className="font-medium mb-2">Recursos</h3>
-                <div className="flex flex-wrap space-x-2">
-                  {selectedGateway.recursos?.map((recurso: string, index: number) => (
-                    <span
-                      key={index}
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-white bg-[#65BD00] rounded-full dark:bg-[#A9C24D] mb-4"
-                    ><CodeXml className="w-4 h-4 mr-1" />
-                      {recurso}
-                    </span>
-                  ))}
+                <hr className="mb-4" />
+                <div className="flex justify-center space-x-4 mb-4">
+                  <a
+                    href={selectedGateway.doc}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center bg-[#FAFAF9] text-[#65BE00] text-sm font-medium py-1 px-3 rounded-[15px] hover:bg-[#EEF7E3] dark:bg-[#2A2921] dark:hover:bg-[#2B2A21] dark:text-[#A9C24D]"
+                  >
+                    <Book className="size-5 mr-2" /> Documentação
+                  </a>
+                  <a
+                    href={selectedGateway.site}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center bg-[#FAFAF9] text-[#65BE00] text-sm font-medium py-1 px-3 rounded-[15px] hover:bg-[#EEF7E3] dark:bg-[#2A2921] dark:hover:bg-[#2B2A21] dark:text-[#A9C24D]"
+                  >
+                    <Earth className="size-5 mr-2" /> Site
+                  </a>
                 </div>
-              </div>
-
-              <hr className="mb-4" />
-              <div className="mb-4">
-                <h3 className="font-medium mb-2">
-                  Simulação{" "}
-                  <span className="text-[#65BE00] dark:text-[#A9C24E]">
-                    (~
-                    {selectedGateway.nome === "AbacatePay 🥑"
-                      ? `${selectedGateway.porcentagem}R$`
-                      : `${selectedGateway.porcentagem}%`}
-                    )
-                  </span>
-                </h3>
-
-                <div className="flex items-center space-x-4">
-                  <input
-                    type="number"
-                    placeholder="Seu dinheiro"
-                    value={inputMoney}
-                    onChange={(e) => handleInputChange(e.target.value)}
-                    className="p-2 border-[2px] rounded-md w-1/2 bg-white border-[#9AB247] focus:outline-none focus:ring-0 focus:border-[#73C417] dark:text-[white] dark:bg-[#313027]"
-                  />
-                  <input
-                    type="number"
-                    value={calculatedAmount.toFixed(2)}
-                    disabled
-                    className="p-2 border-[2px] rounded-md w-1/2 bg-gray-200 border-[#9AB247] focus:outline-none focus:ring-0 dark:bg-[#312F27]"
-                  />
+                <div className="flex justify-center items-center">
+                  <Button onClick={handleClose} className="mt-4">
+                    Fechar
+                  </Button>
                 </div>
-              </div>
 
-              <hr className="mb-4" />
-              <div className="flex justify-center space-x-4 mb-4">
-                <a
-                  href={selectedGateway.doc}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center bg-[#FAFAF9] text-[#65BE00] text-sm font-medium py-1 px-3 rounded-[15px] hover:bg-[#EEF7E3] dark:bg-[#2A2921] dark:hover:bg-[#2B2A21] dark:text-[#A9C24D]"
-                >
-                  <Book className="size-5 mr-2" /> Documentação
-                </a>
-                <a
-                  href={selectedGateway.site}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center bg-[#FAFAF9] text-[#65BE00] text-sm font-medium py-1 px-3 rounded-[15px] hover:bg-[#EEF7E3] dark:bg-[#2A2921] dark:hover:bg-[#2B2A21] dark:text-[#A9C24D]"
-                >
-                  <Earth className="size-5 mr-2" /> Site
-                </a>
               </div>
-              <div className="flex justify-center items-center">
-                <Button onClick={handleClose} className="mt-4">
-                  Fechar
-                </Button>
-              </div>
-
             </div>
-          </div>
-        )}
+          )}
         </div>
-     </NextThemesProvider>
+      </NextThemesProvider>
     </div>
   )
 }
