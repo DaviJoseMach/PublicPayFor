@@ -48,3 +48,39 @@ const countries = [
 ```
 
 These fields represent **filters**, and you can add new filters by extending the arrays while following the same structure.
+
+ ### Data Porting in PayFor API
+
+To perform a data port using the PayFor API, you need to create a JSON file with specific fields:
+
+**Required Fields**:
+
+-   `name`: Name of the gateway.
+-   `logo`: URL or path to the gateway's logo.
+-   `doc`: Documentation link for the gateway.
+-   `site`: Website of the gateway.
+-   `countries`: List of supported countries.
+-   `resources`: Available payment resources (e.g., "Pix", "Credit Card").
+-   `percentage`: Fee percentage for using the gateway.
+-   `tag`: Tags categorizing the gateway.
+-   `difficulty`: Difficulty level for integration.
+
+**Example JSON**:
+
+```json
+{
+  "name": "AbacatePay",
+  "logo": "https://example.com/logo.png",
+  "doc": "https://example.com/docs",
+  "site": "https://example.com",
+  "countries": ["Brazil", "USA"],
+  "resources": ["Pix", "Credit Card", "Debit Card"],
+  "percentage": 2.5,
+  "tag": ["Innovative", "Recommended"],
+  "difficulty": "Easy"
+}
+
+```
+
+PayFor provides a proprietary resource for managing these ports directly through our API, making the integration process seamless and efficient. Further details on utilizing this resource will follow.
+
