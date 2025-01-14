@@ -49,38 +49,129 @@ const countries = [
 
 These fields represent **filters**, and you can add new filters by extending the arrays while following the same structure.
 
- ### Data Porting in PayFor API
-
-To perform a data port using the PayFor API, you need to create a JSON file with specific fields:
-
-**Required Fields**:
-
--   `name`: Name of the gateway.
--   `logo`: URL or path to the gateway's logo.
--   `doc`: Documentation link for the gateway.
--   `site`: Website of the gateway.
--   `countries`: List of supported countries.
--   `resources`: Available payment resources (e.g., "Pix", "Credit Card").
--   `percentage`: Fee percentage for using the gateway.
--   `tag`: Tags categorizing the gateway.
--   `difficulty`: Difficulty level for integration.
-
-**Example JSON**:
-
-```json
-{
-  "name": "AbacatePay",
-  "logo": "https://example.com/logo.png",
-  "doc": "https://example.com/docs",
-  "site": "https://example.com",
-  "countries": ["Brazil", "USA"],
-  "resources": ["Pix", "Credit Card", "Debit Card"],
-  "percentage": 2.5,
-  "tag": ["Innovative", "Recommended"],
-  "difficulty": "Easy"
-}
-
-```
-
 PayFor provides a proprietary resource for managing these ports directly through our API, making the integration process seamless and efficient. Further details on utilizing this resource will follow.
 
+----
+
+
+
+# **Data Porting Method**
+
+The PayFor API provides a custom method to port data into the system. This method is based on a structured process involving TypeScript validation, error handling, and integration into the database.
+
+#### **Step-by-Step Process**
+
+1.  **Data Structure**  
+    The data must follow the JSON format with the following fields:
+    
+    -   `nome` (string): The name of the gateway.
+    -   `logo` (string): The URL of the logo.
+    -   `doc` (string): The documentation link.
+    -   `site` (string): The official site link.
+    -   `paises` (array of strings): Countries where the gateway operates.
+    -   `recursos` (array of strings): Available features (e.g., "Pix", "Checkout").
+    -   `porcentagem` (number): The gateway's transaction percentage.
+    -   `tag` (array of strings): Tags for categorization.
+    -   `dificuldade` (string): The difficulty level (e.g., "Fácil", "Média", "Difícil").
+    
+    **Example JSON:**
+    
+    ```json
+    {
+      "nome": "ExemploPay",
+      "logo": "https://example.com/logo.png",
+      "doc": "https://example.com/doc",
+      "site": "https://example.com",
+      "paises": ["Brasil", "Canadá", "EUA"],
+      "recursos": ["Pix", "Cartão de crédito", "Checkout"],
+      "porcentagem": 2.5,
+      "tag": ["Recomendado", "Tendência"],
+      "dificuldade": "Fácil"
+    }
+    
+    ```
+    
+2.  **Validation Function**  
+    Use a TypeScript function to validate the data structure.
+    
+    ```ts
+    interface GatewayData {
+      nome: string;
+      logo: string;
+      doc: string;
+      site: string;
+      paises: string[];
+      recursos: string[];
+      porcentagem: number;
+      tag: string[];
+      dificuldade: string;
+    }
+    
+    function validateGatewayData(data: any): { isValid: boolean; errors: string[] } {
+      const errors: string[] = [];
+    
+      if (typeof data.nome !== "string") errors.push("Invalid 'nome' field.");
+      if (typeof data.logo !== "string") errors.push("Invalid 'logo' field.");
+      if (typeof data.doc !== "string") errors.push("Invalid 'doc' field.");
+      if (typeof data.site !== "string") errors.push("Invalid 'site' field.");
+      if (!Array.isArray(data.paises)) errors.push("Invalid 'paises' field.");
+      if (!Array.isArray(data.recursos)) errors.push("Invalid 'recursos' field.");
+      if (typeof data.porcentagem !== "number") errors.push("Invalid 'porcentagem' field.");
+      if (!Array.isArray(data.tag)) errors.push("Invalid 'tag' field.");
+      if (typeof data.dificuldade !== "string") errors.push("Invalid 'dificuldade' field.");
+    
+      return { isValid: errors.length === 0, errors };
+    }
+    
+    ```
+    
+3.  **Data Processing**  
+    Use a `try-catch` block to handle errors and add the data if validation passes.
+    
+    ```ts
+    function processGatewayData(data: any): void {
+      try {
+        const validation = validateGatewayData(data);
+    
+        if (!validation.isValid) {
+          console.log("Validation errors:", validation.errors);
+          console.log("Data reset.");
+          return;
+        }
+    
+        // Add data to JSON or database
+        const database: GatewayData[] = []; // Example database
+        database.push(data);
+        console.log("Data added successfully:", data);
+    
+      } catch (error) {
+        console.error("Error processing gateway data:", error);
+      }
+    }
+    
+    ```
+    
+4.  **Usage**  
+    Call the `processGatewayData` function with your JSON object.
+    
+    ```ts
+    const newGateway = {
+      nome: "ExemploPay",
+      logo: "https://example.com/logo.png",
+      doc: "https://example.com/doc",
+      site: "https://example.com",
+      paises: ["Brasil", "Canadá", "EUA"],
+      recursos: ["Pix", "Cartão de crédito", "Checkout"],
+      porcentagem: 2.5,
+      tag: ["Recomendado", "Tendência"],
+      dificuldade: "Fácil"
+    };
+    
+    processGatewayData(newGateway);
+    
+    ```
+    
+
+----------
+
+This method ensures the data is validated, errors are handled gracefully, and valid data is seamlessly integrated into the system.
