@@ -293,7 +293,7 @@ export const View: React.FC = () => {
 
                   </div>
                 </div>
-                <hr className="w-full border-t border-gray-300 dark:border-[#292524] my-4" />
+                <hr className="w-full border-t border-gray-300 dark:border-[#141212] my-4" />
 
                 {/* Badges */}
                 <div className="flex justify-center space-x-4 mb-4">
