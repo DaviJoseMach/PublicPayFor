@@ -13,7 +13,6 @@ const GatewaysPage: React.FC = () => {
   return (
     <>
       <div className="mainDivGateways">
-        
           < CardWithForm />
         </div>
     </>
