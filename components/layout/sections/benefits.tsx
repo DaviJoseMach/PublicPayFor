@@ -43,12 +43,12 @@ export const BenefitsSection = () => {
           <h2 className="text-lg text-primary mb-2 tracking-wider">Benefícios</h2>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Encontre o Gateway Ideal
+            Encontre o Gateway Ideal
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-          Descubra e compare os melhores gateways de pagamento.
-Encontre opções ideais para Pix, assinaturas e muito mais.
-Simplifique suas escolhas com informações claras e completas.
+            Descubra e compare os melhores gateways de pagamento.
+            Encontre opções ideais para Pix, assinaturas e muito mais.
+            Simplifique suas escolhas com informações claras e completas.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ Simplifique suas escolhas com informações claras e completas.
           {benefitList.map(({ icon, title, description }, index) => (
             <Card
               key={title}
-              className="bg-muted/50 dark:bg-card hover:bg-background transition-all delay-75 group/number"
+              className="bg-muted/50 dark:bg-card hover:bg-background transition-all delay-75 group/number dark:border-[#292524]"
             >
               <CardHeader>
                 <div className="flex justify-between">
