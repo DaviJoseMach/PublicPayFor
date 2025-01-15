@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GitPullRequest } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,6 +54,15 @@ export const HeroSection = () => {
                 target="_blank"
               >
                 Repositório
+              </Link>
+            </Button>
+            <br></br><br></br>
+            <Button className="w-5/6 md:w-1/4 font-bold group/arrow">
+              <Link href="/solicitar" passHref>
+                <span className="flex items-center">
+                  Solicitar
+                  <GitPullRequest className="size-5 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                </span>
               </Link>
             </Button>
           </div>
